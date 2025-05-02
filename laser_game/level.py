@@ -9,9 +9,9 @@ class Level:
         self.margin = 100
         self.grid = [[None for _ in range(width)] for _ in range(height)]
         
-        # Placeholder for start and end points
-        self.start_pos = (0, 0)
-        self.end_pos = (width-1, height-1)
+        # Start and end points
+        self.start_pos = (0, 0)  # Green start point
+        self.end_pos = (width-1, height-1)  # Red end point
         
         # Editor mode flag
         self.editor_mode = True
