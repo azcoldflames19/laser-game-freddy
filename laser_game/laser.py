@@ -36,7 +36,11 @@ class Laser:
             # Check for mirror
             cell = self.level.grid[next_pos[1]][next_pos[0]]
             if cell and cell['type'] == 'mirror':
-                direction = (-direction[1], -direction[0])  # 90 degree reflection
+                # Calculate reflection based on mirror angle
+                if cell['angle'] == 45:
+                    direction = (-direction[1], direction[0])  # 45 degree reflection
+                else:
+                    direction = (-direction[0], -direction[1])  # 90 degree reflection
 
             current_pos = next_pos
 
