@@ -28,6 +28,20 @@ class Level:
                 )
                 pygame.draw.rect(screen, (50, 50, 50), rect, 1)
 
+                # Draw mirror if present
+                if self.grid[y][x] and self.grid[y][x]['type'] == 'mirror':
+                    center = (
+                        self.margin + x * self.cell_size + self.cell_size // 2,
+                        self.margin + y * self.cell_size + self.cell_size // 2
+                    )
+                    pygame.draw.line(
+                        screen, 
+                        (200, 200, 200),
+                        (center[0] - 20, center[1] - 20),
+                        (center[0] + 20, center[1] + 20),
+                        3
+                    )
+
         # Draw start and end points
         self._draw_point(screen, self.start_pos, (0, 255, 0))  # Green for start
         self._draw_point(screen, self.end_pos, (255, 0, 0))    # Red for end
