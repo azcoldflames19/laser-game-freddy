@@ -54,3 +54,5 @@ class Laser:
     def toggle(self):
         """Toggle laser on/off"""
         self.active = not self.active
+        if not self.active:
+            self.path = []
