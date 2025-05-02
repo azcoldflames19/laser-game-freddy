@@ -23,6 +23,9 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.laser.toggle()
             # Editor controls will be added here
 
     def update(self):
