@@ -1,6 +1,6 @@
 import pygame
-from level import Level
-from laser import Laser
+from laser_game.level import Level
+from laser_game.laser import Laser
 
 class Game:
     def __init__(self):

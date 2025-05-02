@@ -1,4 +1,5 @@
 import pygame
+from laser_game.level import Level
 
 class Laser:
     def __init__(self, level):
