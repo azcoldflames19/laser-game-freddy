@@ -34,13 +34,22 @@ class Level:
                         self.margin + x * self.cell_size + self.cell_size // 2,
                         self.margin + y * self.cell_size + self.cell_size // 2
                     )
-                    pygame.draw.line(
-                        screen, 
-                        (200, 200, 200),
-                        (center[0] - 20, center[1] - 20),
-                        (center[0] + 20, center[1] + 20),
-                        3
-                    )
+                    angle = self.grid[y][x]['angle']
+                    # Calculate endpoints based on angle
+                    if angle == 0:
+                        start = (center[0] - 20, center[1])
+                        end = (center[0] + 20, center[1])
+                    elif angle == 45:
+                        start = (center[0] - 20, center[1] - 20)
+                        end = (center[0] + 20, center[1] + 20)
+                    elif angle == 90:
+                        start = (center[0], center[1] - 20)
+                        end = (center[0], center[1] + 20)
+                    else:  # 135 degrees
+                        start = (center[0] + 20, center[1] - 20)
+                        end = (center[0] - 20, center[1] + 20)
+                    
+                    pygame.draw.line(screen, (200, 200, 200), start, end, 3)
 
         # Draw start and end points
         self._draw_point(screen, self.start_pos, (0, 255, 0))  # Green for start
@@ -57,7 +66,14 @@ class Level:
     def add_mirror(self, x, y, angle):
         """Add a mirror at grid position (x,y) with given angle"""
         if 0 <= x < self.width and 0 <= y < self.height:
-            self.grid[y][x] = {'type': 'mirror', 'angle': angle}
+            self.grid[y][x] = {'type': 'mirror', 'angle': angle % 180}  # Keep angle between 0-179
+
+    def rotate_mirror(self, x, y):
+        """Rotate mirror through 4 angles (0°, 45°, 90°, 135°)"""
+        if 0 <= x < self.width and 0 <= y < self.height:
+            if self.grid[y][x] and self.grid[y][x]['type'] == 'mirror':
+                current_angle = self.grid[y][x]['angle']
+                self.grid[y][x]['angle'] = (current_angle + 45) % 180
 
     def remove_object(self, x, y):
         """Remove object at grid position (x,y)"""

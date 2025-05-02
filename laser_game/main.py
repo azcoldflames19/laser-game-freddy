@@ -27,7 +27,16 @@ class Game:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.laser.toggle()
-            # Editor controls will be added here
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left click
+                if self.level.editor_mode:
+                    mouse_pos = pygame.mouse.get_pos()
+                    cell_size = self.level.cell_size
+                    margin = self.level.margin
+                    x = (mouse_pos[0] - margin) // cell_size
+                    y = (mouse_pos[1] - margin) // cell_size
+                    if 0 <= x < self.level.width and 0 <= y < self.level.height:
+                        if self.level.grid[y][x] and self.level.grid[y][x]['type'] == 'mirror':
+                            self.level.rotate_mirror(x, y)
 
     def update(self):
         self.laser.update()
