@@ -9,7 +9,7 @@ class Game:
         pygame.display.set_caption("Laser Reflection Game")
         self.clock = pygame.time.Clock()
         self.level = Level(10, 10)  # 10x10 grid
-        self.level.add_mirror(9, 0, 45)  # Add 45 degree mirror at top right corner
+        self.level.add_mirror(9, 0, 45)  # Add diagonal mirror at top right corner
         self.laser = Laser(self.level)
         self.running = True
 
