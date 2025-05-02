@@ -49,3 +49,12 @@ class Level:
         """Remove object at grid position (x,y)"""
         if 0 <= x < self.width and 0 <= y < self.height:
             self.grid[y][x] = None
+
+    def grid_to_pixel(self, grid_pos):
+        """Convert grid coordinates to screen coordinates"""
+        x, y = grid_pos
+        center = (
+            self.margin + x * self.cell_size + self.cell_size // 2,
+            self.margin + y * self.cell_size + self.cell_size // 2
+        )
+        return center
